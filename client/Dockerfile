@@ -1,6 +1,6 @@
 
 # Base image for operating system
-FROM node:alpine as builder-1
+FROM node:alpine as builder_1
 
 # set  a working directory
 WORKDIR app
@@ -15,7 +15,7 @@ RUN npm install --repo-update
 COPY . . 
 
 # run the command
-CMD ["npm", "run", "build"]
+RUN npm run build
 
 # run nginx for react app
 FROM nginx:latest 
@@ -24,6 +24,6 @@ FROM nginx:latest
 COPY ./react-nginx/react-nginx.conf /etc/nginx/nginx.conf 
 
 # serve react build files
-COPY --from builder-1 /app/build /usr/share/nginx/html
+COPY --from=builder_1 /app/build /usr/share/nginx/html
 
 
