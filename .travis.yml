@@ -13,9 +13,11 @@ after_success:
   - docker build -t atambe/react-webapp02-nginx ./nginx
   - docker build -t atambe/react-webapp02-server ./server
   - docker build -t atambe/react-webapp02-worker ./worker
+   # connect with docker hub registry
+  - echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push  atambe/react-webapp02-client 
+  - docker push  atambe/react-webapp02-nginx 
+  - docker push  atambe/react-webapp02-server 
+  - docker push  atambe/react-webapp02-worker 
 
-deploy:
-  provider: script
-  script: bash docker_push
-  on:
-    branch: master
+  
