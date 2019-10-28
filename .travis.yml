@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t atambe/react-webapp02-client-test -f ./client/Dockerfile.dev .
+  - docker build -t atambe/react-webapp02-client-test -f Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true atambe/react-webapp02-client-test npm test
