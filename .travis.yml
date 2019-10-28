@@ -13,3 +13,9 @@ after_success:
   - docker build -t atambe/react-webapp02-nginx ./nginx
   - docker build -t atambe/react-webapp02-server ./server
   - docker build -t atambe/react-webapp02-worker ./worker
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
