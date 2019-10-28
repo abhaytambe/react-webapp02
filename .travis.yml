@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker run -t atambe/react-webapp02-client-test -f .client/Dockerfile.dev 
+
+script:
+  - docker run -t atambe/react-webapp02-client-test npm test -- --coverage
+
+after_success:
+  - docker build -t atambe/react-webapp02-client ./client
+  - docker build -t atambe/react-webapp02-nginx ./nginx
+  - docker build -t atambe/react-webapp02-server ./server
+  - docker build -t atambe/react-webapp02-worker ./worker
