@@ -9,7 +9,7 @@ script:
   - docker run -e CI=true atambe/react-webapp02-client-test npm test
 
 after_success:
-  - docker build -t atambe/react-webapp02-client ./client
+  - docker build -t abhaytambe/react-webapp02-client ./client
   - docker build -t atambe/react-webapp02-nginx ./nginx
   - docker build -t atambe/react-webapp02-server ./server
   - docker build -t atambe/react-webapp02-worker ./worker
