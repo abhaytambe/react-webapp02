@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_ID" --password-stdin
 
-docker push  atambe/react-webapp02-client 
-docker push  atambe/react-webapp02-nginx 
-docker push  atambe/react-webapp02-server 
-docker push  atambe/react-webapp02-worker 
+docker push  abhaytambe/react-webapp02-client 
+docker push  abhaytambe/react-webapp02-nginx 
+docker push  abhaytambe/react-webapp02-server 
+docker push  abhaytambe/react-webapp02-worker 
