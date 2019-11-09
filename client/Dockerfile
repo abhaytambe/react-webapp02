@@ -1,6 +1,6 @@
 
 # Base image for operating system
-FROM node:alpine as builder_1
+FROM node:alpine as builder
 
 # set  a working directory
 WORKDIR app
@@ -24,6 +24,8 @@ FROM nginx:latest
 COPY ./react-nginx/react-nginx.conf /etc/nginx/nginx.conf 
 
 # serve react build files
-COPY --from=builder_1 /app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
+
+
 
 

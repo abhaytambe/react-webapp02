@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: fib-worker
+  template:
+    spec:
+      containers:
+        - name: fib-worker-container
+          image: stephengrider/multi-worker
+    metadata:
+      labels:
+        component: fib-worker
+
+

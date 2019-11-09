@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-api-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: webapp-api
+  template:
+    metadata:
+      labels:
+        component: webapp-api
+    spec:
+      containers:
+      - name: express-webapp02-api-server
+        image: stephengrider/multi-server
+        ports:
+        - containerPort: 5000

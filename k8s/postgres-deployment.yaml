@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+
+# spec tag will define the selector and template
+
+spec: 
+  # selector will help the Deployment file group the PODS witha specific label
+  replicas: 1
+  selector:
+    matchLabels:
+      component: webapp-postgres
+  template:
+    # template defines the PODS
+    #  create a single instance of the POD
+    metadata:
+      labels:
+        component: webapp-postgres
+    spec:
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+              claimName: postgres-database-persistent-volume-claim
+      containers:
+        - name: webapp-postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: var/lib/postgresql/data
+              subPath: postgres

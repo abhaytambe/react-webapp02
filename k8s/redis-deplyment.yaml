@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: webapp-redis
+  template:
+    metadata:
+      labels:
+        component: webapp-redis
+    spec:
+      containers:
+        - name: webapp-redis
+          image: redis:latest
+          ports:
+            - containerPort: 6379
+
