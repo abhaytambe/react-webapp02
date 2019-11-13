@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-deployment
+# spec is the POD spec
+spec:
+  #define the replicas for POD
+  replicas: 2
+  #selector is the key property used to group the PODS and
+  #apply the Deployment config to it
+  selector:
+    # the name or key-value-pair within the matchLabels should match with labels under POD spec
+    matchLabels:
+      appName: sampleDeployment
+  # template defines the POD spec, the entire template is used to create a POD
+  template:
+    metadata:
+      name: simple-deployment-pod
+      labels:
+        # used by the Deployment selector
+        appName: sampleDeployment
+
+    spec:
+      containers:
+        - name: sampleDeployment.nginx
+          image: nginx
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+
