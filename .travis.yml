@@ -2,6 +2,11 @@ sudo: required
 services:
   - docker
 
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+
 
 before_install:
   - curl https://sdk.cloud.google.com | bash > /dev/null;
@@ -10,8 +15,13 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_0c35eebf403c_key -iv $encrypted_0c35eebf403c_iv -in angular-yeti-258803-f247447d7224.json.enc -out angular-yeti-258803-f247447d7224.json -d
   - gcloud auth activate-service-account --key-file angular-yeti-258803-f247447d7224.json
   - gcloud config set project angular-yeti-258803
-  - gcloud set compute/zone us-central1-a
+  - gcloud config set compute/zone us-central1-a
   - gcloud container clusters get-credentials simple-cluster-02
+  - echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_ID" --password-stdin
+
+deploy:
+  provider: script
+  script: bash ./deploy.sh
 
 
 # before_install:
